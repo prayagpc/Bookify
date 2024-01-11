@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="/styles/form.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+</head>
+
+<body>
+  <%- include('partials/herosection.ejs') %>
+    <div class="container">
+      <% if(locals.res) { %>
+        <form id="contact" action="/edit/<%= res.bookid %>" method="post" class="my-4">
+          <h3>Edit Book</h3>
+          <fieldset>
+            <input placeholder="Book Name" type="text" name="BookName" tabindex="1" required autofocus
+              value="<%= res.bookname %>" />
+          </fieldset>
+          <fieldset>
+            <input placeholder="Author Name" type="text" name="AuthorName" tabindex="2" required
+              value="<%= res.authorname  %>" />
+          </fieldset>
+          <fieldset>
+            <input placeholder="ISBN NO." type="number" tabindex="3" required name="ISBN" value="<%= res.isbn  %>" />
+          </fieldset>
+          <fieldset>
+            <input placeholder="Rating" type="number" tabindex="4" required step=".01" max="10" name="Rating"
+              value="<%= res.rating  %>" />
+          </fieldset>
+          <fieldset>
+            <input placeholder="Date" type="date" tabindex="5" required name="date"
+              value="<%= res.readdate.toISOString().split('T')[0]  %>" />
+          </fieldset>
+          <fieldset>
+            <textarea name="summary" placeholder="Type your summary here...." tabindex="6" required name="text">
+<%= res.summary %></textarea>
+          </fieldset>
+          <fieldset>
+            <textarea id="info" name="info" placeholder="Type  detailed information of book...." tabindex="7" required
+              name="text">
+<%= res.info %></textarea>
+          </fieldset>
+          <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">
+            Submit
+          </button>
+        </form>
+        <% } else{%>
+          <form id="contact" action="/add" method="post" class="my-4">
+            <h3>Add Book</h3>
+            <fieldset>
+              <input placeholder="Book Name" type="text" name="BookName" tabindex="1" required autofocus />
+            </fieldset>
+            <fieldset>
+              <input placeholder="Author Name" type="text" name="AuthorName" tabindex="2" required />
+            </fieldset>
+            <fieldset>
+              <input placeholder="ISBN NO." type="number" tabindex="3" required name="ISBN" />
+            </fieldset>
+            <fieldset>
+              <input placeholder="Rating" type="number" tabindex="4" required step=".01" max="10" name="Rating" />
+            </fieldset>
+            <fieldset>
+              <input placeholder="Date" type="date" tabindex="4" required name="date" />
+            </fieldset>
+            <fieldset>
+              <textarea name="summary" placeholder="Type your summary here...." tabindex="5" required
+                name="text"></textarea>
+            </fieldset>
+            <fieldset>
+              <textarea id="info" name="info" placeholder="Type  detailed information of book...." tabindex="6" required
+                name="text"></textarea>
+            </fieldset>
+            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">
+              Submit
+            </button>
+          </form>
+
+          <% } %>
+    </div>
+
+    <%- include('partials/footer.ejs') %>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<%- include('partials/header.ejs') %>
+    <%- include('partials/herosection.ejs') %>
+    <div class="container">
+        <hr class="featurette-divider">
+        <div class="col-lg-8 col-md-7 col-12">
+           <div class="d-flex align-items-center justify-content-between mb-4">
+              <div>
+                 <h4 class="mb-0">Contact details &amp; Reviews</h4>
+              </div>
+            
+           </div>
+           <% result.forEach(res=>{ %>
+            
+           <div class="mb-4 pb-4 border-bottom">
+              <div class="d-flex mb-3 align-items-center">
+                 <div class="ml-2">
+                    <h5 class="mb-1">
+                       <%= res.name %> <%= res.surname %>
+                    </h5>
+                    <p class="font-12 mb-0">
+                      <%= res.email %>
+                    </p>
+                 </div>
+              </div>
+              <div class="mb-2">
+                 
+                 <span class="h5"><%= res.subject %></span>
+              </div>
+              <p>
+                <%= res.message %>
+              </p>
+            </div>
+            <% }) %>
+        
+        </div>
+     </div>
+     <%- include('partials/footer.ejs') %>

@@ -1,0 +1,40 @@
+<%- include('partials/header.ejs') %>
+    <%- include('partials/herosection.ejs') %>
+
+        <section id="allbooks">
+            <% if(locals.result){ %>
+                <% result.forEach(res=>{ %>
+                    <div class="container">
+                        <hr class="featurette-divider">
+                        <div class="row featurette ms-5 py-4">
+                            <div class="col-md-8 order-md-2">
+                                <h3 class="featurette-heading fw-normal lh-1">
+                                    <a href="/read/<%= res.bookid %>">
+                                        <%= res.bookname %>
+                                    </a>
+                                </h3>
+                                <h3 class="featurette-heading fw-normal by ">by <%= res.authorname %>
+                                </h3>
+                                <p> ISBN: <%= res.isbn %>
+                                </p>
+                                <p> How strongly I recommend it: 10/<%= res.rating %>
+                                </p>
+                                <p>Date read: <%= res.readdate.toLocaleDateString(undefined, { year: 'numeric' ,
+                                        month: 'long' , day: 'numeric' }) %>
+                                </p>
+                                <p class="lead">
+                                    <%= res.summary %>
+                                </p>
+                            </div>
+                            <div class="col-md-2 order-md-1 me-3">
+                                <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+                                    width="200" height="200" src="<%= res.source %>"
+                                    preserveAspectRatio="xMidYMid slice" focusable="false">
+
+                            </div>
+                        </div>
+                        <% })%>
+                            <% } %>
+                    </div>
+        </section>
+        <%- include('partials/footer.ejs') %>
