@@ -14,7 +14,7 @@ const db = new pg.Client({
 db.connect();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -153,7 +153,7 @@ app.get('/contact', (req, res) => {
 });
 app.post('/contact', async (req, res) => {
     const result= req.body;
-    console.log(req.body);
+    // console.log(req.body);
     try {
         await db.query('insert into contact (name,surname,email,subject,message) values($1,$2,$3,$4,$5)',[result.name,result.surname,result.email,result.subject,result.message]);
         res.render('contact.ejs', { success: "Thank you for getting in touch. We appreciate your message and will be in touch soon." });
@@ -167,7 +167,7 @@ app.get('/search',async (req,res)=>{
     const reslt= req.query.search;
     try {
         const output =await db.query(`Select * from books where lower(bookname) like lower('%${reslt}%')`);
-        console.log(output);
+        // console.log(output);
         res.render('index.ejs', { result: output.rows });
     } catch (error) {
         console.log(error);
@@ -178,7 +178,7 @@ app.get('/search',async (req,res)=>{
 app.get(`/review/${process.env.PG_KEY}` , async(req,res)=>{
     try {
         const output= await db.query('select * from contact');
-        console.log(output.rows);
+        // console.log(output.rows);
         res.render("review.ejs",{result: output.rows});
         
     } catch (error) {
