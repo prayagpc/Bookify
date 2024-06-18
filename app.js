@@ -3,22 +3,34 @@ import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
 
+
 const db = new pg.Client({
-    user: process.env.PG_USER,
-    host: process.env.PG_HOST,
-    password: process.env.PG_PASSWORD,
-    database: process.env.PG_DATABASE,
-    port: process.env.PG_PORT,
-    ssl: true
+    // host: process.env.PG_HOST,
+    // database: process.env.PG_DATABASE,
+    // username: process.env.PG_USER,
+    // password: process.env.PG_PASSWORD,
+    // port: process.env.PG_PORT,
+    connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
-db.connect();
+
+db.connect(err => {
+    if (err) {
+        console.error('Connection error', err.stack);
+        console.error('Connection error message', err.message);
+    } else {
+        console.log('Connected to the database');
+    }
+});
 
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
-
+console.log("hi1")
 // Fetch all book details on main page
 app.get('/', async (req, res) => {
     try {
