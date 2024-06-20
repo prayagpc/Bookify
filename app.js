@@ -11,9 +11,6 @@ const db = new pg.Client({
     // password: process.env.PG_PASSWORD,
     // port: process.env.PG_PORT,
     connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
 });
 
 
@@ -30,7 +27,6 @@ const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
-console.log("hi1")
 // Fetch all book details on main page
 app.get('/', async (req, res) => {
     try {
